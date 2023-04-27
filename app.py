@@ -18,6 +18,16 @@ if fitness_goal == 'weight loss':
 else:
     calorie_intake = bmr * 1.2
 
+# Classify user based on their BMI
+if bmi < 18.5:
+    bmi_category = 'underweight'
+elif bmi < 25:
+    bmi_category = 'normal'
+elif bmi < 30:
+    bmi_category = 'overweight'
+else:
+    bmi_category = 'obese'
+
 # Create features that represent the user's physical characteristics and fitness goals
 user_features = pd.DataFrame({
     'age': [age],
@@ -26,9 +36,14 @@ user_features = pd.DataFrame({
     'gender': ['M' if gender == 'M' else 'F'],
     'fitness_goal': ['weight loss' if fitness_goal == 'weight loss' else 'muscle gain' ],
     'bmi': [bmi],
+    'bmi_category': [bmi_category],
     'bmr': [bmr],
     'calorie_intake': [calorie_intake]
 })
 
+# Print the user's features and recommended daily calorie intake
 print(user_features)
 print("As per your bmi, Your calorie_intake should be ",calorie_intake)
+
+# Print a statement about the user's BMI category
+print("You are classified as", bmi_category)
